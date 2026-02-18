@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Purnima Rohilla - Doctoral candidate at IIT Bombay specializing in AI governance and public policy." />
+  <meta property="og:title" content="Purnima Rohilla – Doctoral Researcher at IIT Bombay">
+  <meta property="og:description" content="Exploring AI governance and public policy through discourse analysis.">
+  <meta property="og:image" content="photo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Purnima Rohilla</title>
+  <link rel="icon" type="image/x-icon" href="photo.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --text-light: #111111;
+      --muted-light: #cdcdcd;
+      --border-light: #dddddd;
+
+      --bg-dark: #1a1a1a;
+      --text-dark: #f5f5f5;
+      --muted-dark: #dedada;
+      --border-dark: #333333;
+    }
+
+    html[data-theme='light'] {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+      --border: var(--border-light);
+    }
+
+    html[data-theme='dark'] {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --muted: var(--muted-dark);
+      --border: var(--border-dark);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Lora', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 18px;
+      transition: background-color 0.3s, color 0.3s;
+      text-align: center;
+    }
+
+    p, li {
+      text-align: justify;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.7rem;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      background-color: var(--bg);
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, border 0.3s;
+    }
+
+    header {
+      padding: 5.5rem 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-content {
+      width: 100%;
+      max-width: 720px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .designation {
+      margin-top: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .contact {
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .contact-links {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .profile-pic {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      text-align: left;
+    }
+
+    section {
+      margin: 1rem 0 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 80px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2rem;
+      margin: 0 0 1rem 0;
+      color: var(--text);
+    }
+
+    ul {
+      padding-left: 1.25rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.5rem 1rem;
+      font-family: 'Playfair Display', serif;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .topnav a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+
+    .topnav a:hover,
+    .topnav a.active {
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .topnav .divider {
+      color: var(--border);
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none !important;
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+
+      body {
+        font-size: 16px;
+        padding: 0 1rem;
+      }
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 50%;
+      left: 24px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 1000;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      bottom: 14px;
+      left: 6px;
+      width: 1px;
+      background-color: var(--muted);
+      z-index: -1;
+    }
+
+    .sidebar-name {
+      color: var(--text);
+      margin: 0 0 1.5rem 20px;
+      text-align: left;
+      user-select: none;
+      line-height: 1.2;
+    }
+
+    .sidebar-name strong {
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .sidebar-name small {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      margin: 14px 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.3s ease, font-weight 0.3s ease, font-size 0.3s ease;
+    }
+
+    .sidebar a::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--muted);
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a:focus,
+    .sidebar a.active {
+      color: var(--text);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .sidebar a:hover::before,
+    .sidebar a:focus::before,
+    .sidebar a.active::before {
+      background-color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="index.html" class="active">About</a>
+    <span class="divider">|</span>
+    <a href="blog.html">Blog</a>
+  </nav>
+
+  <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle" title="Toggle light/dark mode">
+    🌞 Switch to Dark Mode
+  </button>
+
+  <nav class="sidebar">
+    <div class="sidebar-name">
+      <strong>Purnima Rohilla</strong>
+      <small>Doctoral Researcher</small>
+    </div>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#publications">Publications</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#languages">Languages</a>
+    <a href="#cv">Curriculum Vitae</a>
+  </nav>
+
+  <header>
+    <div class="header-content">
+      <h1>Purnima Rohilla</h1>
+      <img src="photo.jpg" alt="Portrait of Purnima Rohilla" class="profile-pic" />
+      <div class="designation">Doctoral Candidate, IIT Bombay</div>
+      <div class="contact">
+        <a href="mailto:purnimar@iitb.ac.in">purnimar@iitb.ac.in</a> | +91 9910433443
+      </div>
+      <div class="contact-links">
+        <a href="mailto:purnimar@iitb.ac.in" title="Email">📧 Email</a>
+        <a href="https://scholar.google.com/citations?user=QIx3Tf8AAAAJ&hl=en" target="_blank" title="Google Scholar">📚 Scholar</a>
+        <a href="https://www.linkedin.com/in/purnima-rohilla/" target="_blank" title="LinkedIn">🔗 LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <section id="about">
+      <h2>About me</h2>
+      <p>
+        I'm a doctoral candidate at <strong>IIT Bombay</strong>, specializing in the intersection of 
+        <strong>AI governance, public policy, and standardization</strong>. My research investigates how 
+        <strong>AI trustworthiness</strong> is constructed and institutionalized across global policy, regulatory, 
+        and technical communities. Using frameworks like the <em>Narrative Policy Framework</em> and 
+        <em>critical discourse analysis</em>, I examine how narratives of trust shape standards, risk governance, 
+        and the social legitimacy of AI—particularly in high-stakes contexts such as 
+        <strong>public services, safety, and accountability</strong>.
+    </p> 
+    <p>
+        I collaborate with <strong>standard-setting bodies</strong> such as the <strong>Bureau of Indian Standards (BIS)</strong> 
+        to study how global norms for <strong>responsible and trustworthy AI</strong> are being codified. My work bridges 
+        <strong>regulatory foresight, socio-technical governance, and strategic communication</strong>, offering insight 
+        for <strong>tech teams</strong> focused on <strong>responsible AI, trust & safety, global compliance, and AI policy strategy</strong>.
+    </p>
+    
+
+      </p>
+      
+      
+      <h3 style="margin-top: 2rem; font-size: 1.1rem;">Research Interests</h3>
+      <style>
+        .hover-highlight {
+          border: 1px solid var(--border);
+          padding: 0.6rem 1rem;
+          border-radius: 6px;
+          transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        
+        .hover-highlight:hover {
+          background-color: #f0f0f0; /* A light grey background */
+          border-color: #aaa; /* A slightly darker border */
+        }
+        </style>
+        
+        <div style="
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.8rem;
+          margin-top: 1rem;
+        ">
+          <div class="hover-highlight">AI governance</div>
+          <div class="hover-highlight">Public AI systems</div>
+          <div class="hover-highlight">Disruptive technologies</div>
+          <div class="hover-highlight">Technology policy & regulation</div>
+          <div class="hover-highlight">Trustworthiness</div>
+          <div class="hover-highlight">Standards for responsible AI</div>
+          <div class="hover-highlight">Discourse analysis</div>
+          <div class="hover-highlight">AI <i> for </i> research </div>
+          <div class="hover-highlight">Ethics in emerging tech</div>
+        </div>
+
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <ul>
+        <li>
+          <strong>Ph.D. in Public Policy</strong>, IIT Bombay (2023–present)<br />
+          My research explores how AI trust is narrated in global public discourse. Using discourse analysis and
+          the Narrative Policy Framework, I examine policy texts, media, and standards to understand how
+          institutional narratives shape public perception and governance of AI. <br />
+          <i>Supervised by:</i> Prof. Anupam Guha
+        </li>
+        <br />
+        <li>
+          <strong>Master’s in Public Policy</strong>, IIT Bombay (2021–2023) <br />
+          Explored the role of emerging trustworthiness standards and quality frameworks in public service delivery. <br />
+          <i>Supervised by:</i> Prof. Sundeep Oberoi
+        </li>
+        <br />
+        <li>
+          <strong>Integrated M.Sc. in Economics</strong>, Central University of Tamil Nadu (2014–2019)
+        </li>
+      </ul>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <ul>
+        <li>
+          <strong>Teaching Assistant</strong>, IIT Bombay (2023–present)<br />
+          Courses:
+          <ul>
+            <li>PS 657: Cybersecurity Governance and Management – Policy Considerations (Spring 2025)</li>
+            <li>PS 643: Introduction to AI, Data, and Policy (Autumn 2024, Autumn 2023)</li>
+            <li>PS 643: Advanced Topics in AI, Data and Policy (Spring 2024)</li>
+          </ul>
+        </li>
+        <li><strong>Research Intern</strong>, Bureau of Indian Standards (2022)</li>
+        <li><strong>Policy Fellow</strong>, H21 Foundation (2021)</li>
+        <li><strong>Business Analyst</strong>, Evalueserve Pvt Ltd (2019–2021)</li>
+
+      </ul>
+    </section>
+
+    
+    <section id="publications">
+      <h2>Research & Publications</h2>
+      <ol>
+
+        <li>
+          Rohilla, P., & Guha, A. (2025). <em>The Language of Trust: Investigating the Framing of Trustworthy AI by Big Tech</em>. (Manuscript under review at Nature Machine Intelligence).
+        </li>
+
+        <li>
+          Oberoi, S., Rohilla, P., & Lakshmi, S. (2023). <em>The Indian DPDP Act 2023 – Analysis and Implementation Challenge</em>. <strong>IIPA Digest, 5(4)</strong>.
+        </li>
+        
+        <li>
+          Kayal, P., & Rohilla, P. (2021). <em>Bitcoin in the economics and finance literature: a survey</em>. <strong>SN Business & Economics, 1(7)</strong>, 88.
+        </li>
+      </ol>
+    </section>
+    
+
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <ul>
+        <li><a href="https://coursera.org/share/ee8c5263d01fd7f4f0a15ce31129e5d9" target="_blank">AI for Business Specialisation</a> — University of Pennsylvania (2023)</li>
+        <li><a href="https://courses.edx.org/certificates/5b01b100892a4f2d89d06d6a65daf479" target="_blank">Python Basics for Data Science</a> — IBM (2023)</li>
+        <li><a href="https://courses.edx.org/certificates/2795b2e9db934633a777999c97a1274e" target="_blank">Ethics in AI and Data Science</a> — The Linux Foundation (2022)</li>
+        <li><a href="https://www.udemy.com/certificate/UC-608afb17-acc7-46a4-a3d0-101fbdfb0317/" target="_blank">Public Policy Analysis</a> — Udemy (2021)</li>
+      </ul>
+    </section>
+
+    <section id="languages">
+      <h2>Languages</h2>
+      <p>English (Proficient), Hindi (Native)</p>
+    </section>
+
+    <section id="cv">
+      <h2>Curriculum Vitae</h2>
+      <p>You can also download it here: <a href="CV_PurnimaRohilla.pdf" target="_blank">Download CV (PDF)</a></p>
+      <iframe src="CV_PurnimaRohilla.pdf"></iframe>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Purnima Rohilla — All rights reserved.
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById("theme-toggle");
+    const saved = localStorage.getItem("theme");
+    if (saved) {
+      document.documentElement.setAttribute("data-theme", saved);
+      updateToggleText(saved);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      updateToggleText(next);
+    }
+
+    function updateToggleText(theme) {
+      toggleBtn.textContent =
+        theme === "light" ? "🌞 Switch to Dark Mode" : "🌙 Switch to Light Mode";
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = document.querySelector(`.sidebar a[href="#${id}"]`);
+          if (entry.isIntersecting) {
+            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+            if (link) link.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+    );
+
+    document.querySelectorAll('main section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
