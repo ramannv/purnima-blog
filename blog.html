@@ -213,6 +213,7 @@
       max-width: 720px;
       padding: 6rem 1.5rem 4rem;
       display: none;
+      flex-direction: column;
     }
 
     .post-wrapper h1 {
@@ -366,12 +367,18 @@
     const params = new URLSearchParams(window.location.search);
     const postSlug = params.get("post");
 
+    function decodeBase64UTF8(base64) {
+      const binary = atob(base64.replace(/\s/g, ""));
+      const bytes = new Uint8Array([...binary].map(c => c.charCodeAt(0)));
+      return new TextDecoder("utf-8").decode(bytes);
+    }
+
     if (postSlug) {
       // Single post view
       fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${POSTS_PATH}/${postSlug}?ref=${BRANCH}`)
         .then(r => r.json())
         .then(data => {
-          const text = atob(data.content);
+          const text = decodeBase64UTF8(data.content);
           const { meta, body } = parseFrontmatter(text);
           document.getElementById("post-title").textContent = meta.title || "Untitled";
           document.getElementById("post-date").textContent = meta.date ? formatDate(meta.date) : "";
@@ -393,7 +400,7 @@
           // Fetch all posts to get titles and dates
           return Promise.all(mdFiles.map(f =>
             fetch(f.url).then(r => r.json()).then(data => {
-              const text = atob(data.content);
+              const text = decodeBase64UTF8(data.content);
               const { meta } = parseFrontmatter(text);
               return { name: f.name, title: meta.title || f.name, date: meta.date || "" };
             })
