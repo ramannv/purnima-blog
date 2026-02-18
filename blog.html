@@ -364,8 +364,10 @@
     }
 
     // Check if viewing a single post
+    // Support both /blog/slug (via redirect) and ?post=slug (direct)
     const params = new URLSearchParams(window.location.search);
-    const postSlug = params.get("post");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    const postSlug = params.get("post") || (pathParts[0] === "blog" && pathParts[1] ? pathParts[1] : null);
 
     function decodeBase64UTF8(base64) {
       const binary = atob(base64.replace(/\s/g, ""));
