@@ -319,6 +319,7 @@
       background-color: var(--text);
     }
   </style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -508,6 +509,18 @@
   <footer>
     &copy; 2025 Purnima Rohilla — All rights reserved.
   </footer>
+
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 
   <script>
     const toggleBtn = document.getElementById("theme-toggle");
