@@ -302,7 +302,7 @@
 
   <!-- Single post view -->
   <div class="post-wrapper" id="post-view">
-    <a class="back-link" href="blog.html">← Back to Blog</a>
+    <a class="back-link" href="/blog.html">← Back to Blog</a>
     <h1 id="post-title"></h1>
     <span class="post-date" id="post-date"></span>
     <div class="post-body" id="post-body"></div>
@@ -425,7 +425,7 @@
             const li = document.createElement("li");
             li.className = "post-item";
             li.innerHTML = `
-              <a href="blog.html?post=${encodeURIComponent(slug)}">${post.title}</a>
+              <a href="/blog/${encodeURIComponent(slug)}">${post.title}</a>
               <div class="post-date">${post.date ? formatDate(post.date) : ""}</div>
             `;
             list.appendChild(li);

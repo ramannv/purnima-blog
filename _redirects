@@ -1,0 +1,1 @@
+/blog/:post  /blog.html?post=:post  200
