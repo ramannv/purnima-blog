@@ -374,10 +374,16 @@
     }
 
     if (postSlug) {
-      // Single post view
-      fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${POSTS_PATH}/${postSlug}?ref=${BRANCH}`)
+      // Find the actual filename by matching slug against _posts listing
+      fetch(API_BASE)
         .then(r => r.json())
+        .then(files => {
+          const match = files.find(f => f.name.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "") === postSlug);
+          if (!match) return;
+          return fetch(match.url).then(r => r.json());
+        })
         .then(data => {
+          if (!data) return;
           const text = decodeBase64UTF8(data.content);
           const { meta, body } = parseFrontmatter(text);
           document.getElementById("post-title").textContent = meta.title || "Untitled";
@@ -414,10 +420,12 @@
 
           const list = document.getElementById("post-list");
           posts.forEach(post => {
+            // Strip date prefix (YYYY-MM-DD-) and .md extension for clean URL
+            const slug = post.name.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
             const li = document.createElement("li");
             li.className = "post-item";
             li.innerHTML = `
-              <a href="blog.html?post=${encodeURIComponent(post.name)}">${post.title}</a>
+              <a href="blog.html?post=${encodeURIComponent(slug)}">${post.title}</a>
               <div class="post-date">${post.date ? formatDate(post.date) : ""}</div>
             `;
             list.appendChild(li);
