@@ -315,6 +315,10 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <script>
+    marked.setOptions({ breaks: true });
+  </script>
+
+  <script>
     // Theme toggle
     const toggleBtn = document.getElementById("theme-toggle");
     const saved = localStorage.getItem("theme");
