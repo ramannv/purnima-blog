@@ -13,34 +13,16 @@
       --text-light: #111111;
       --muted-light: #cdcdcd;
       --border-light: #dddddd;
-
       --bg-dark: #1a1a1a;
       --text-dark: #f5f5f5;
       --muted-dark: #dedada;
       --border-dark: #333333;
     }
+    html[data-theme='light'] { --bg: var(--bg-light); --text: var(--text-light); --muted: var(--muted-light); --border: var(--border-light); }
+    html[data-theme='dark']  { --bg: var(--bg-dark);  --text: var(--text-dark);  --muted: var(--muted-dark);  --border: var(--border-dark); }
 
-    html[data-theme='light'] {
-      --bg: var(--bg-light);
-      --text: var(--text-light);
-      --muted: var(--muted-light);
-      --border: var(--border-light);
-    }
-
-    html[data-theme='dark'] {
-      --bg: var(--bg-dark);
-      --text: var(--text-dark);
-      --muted: var(--muted-dark);
-      --border: var(--border-dark);
-    }
-
-    html {
-      overflow-y: scroll;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
+    html { overflow-y: scroll; }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -56,6 +38,7 @@
       min-height: 100vh;
     }
 
+    /* Nav */
     .toggle-btn {
       position: fixed;
       top: 0.6rem;
@@ -71,12 +54,9 @@
       transition: background-color 0.3s, color 0.3s, border 0.3s;
       z-index: 1001;
     }
-
     .topnav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
       background-color: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -88,7 +68,6 @@
       font-family: 'Playfair Display', serif;
       transition: background-color 0.3s, border-color 0.3s;
     }
-
     .topnav a {
       color: var(--muted);
       font-size: 0.85rem;
@@ -97,19 +76,10 @@
       border-radius: 4px;
       transition: color 0.2s;
     }
+    .topnav a:hover, .topnav a.active { color: var(--text); font-weight: bold; }
+    .topnav .divider { color: var(--border); user-select: none; }
 
-    .topnav a:hover,
-    .topnav a.active {
-      color: var(--text);
-      font-weight: bold;
-    }
-
-    .topnav .divider {
-      color: var(--border);
-      user-select: none;
-    }
-
-    /* Coming Soon */
+    /* Coming Soon (hidden by default) */
     .coming-soon-wrapper {
       flex: 1;
       display: none;
@@ -119,47 +89,23 @@
       text-align: center;
       padding: 6rem 2rem 4rem;
     }
-
     .coming-soon-wrapper h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       margin: 0 0 1rem 0;
-      letter-spacing: 0.05em;
     }
-
-    .coming-soon-wrapper p {
-      color: var(--muted);
-      font-size: 1.5rem;
-      margin: 0;
-    }
-
-    .hr-divider {
-      width: 60px;
-      height: 1px;
-      background-color: var(--border);
-      margin: 1.5rem auto;
-    }
-
+    .coming-soon-wrapper p { color: var(--muted); font-size: 1.5rem; margin: 0; }
+    .hr-divider { width: 60px; height: 1px; background-color: var(--border); margin: 1.5rem auto; }
     .office-quote {
       margin: 2.5rem auto 0;
       max-width: 480px;
-      font-family: 'Lora', serif;
       font-style: italic;
       font-size: 1rem;
       color: var(--muted);
       line-height: 1.8;
-      padding-left: 0;
       text-align: center;
     }
-
-    .office-quote cite {
-      display: block;
-      margin-top: 0.75rem;
-      font-style: normal;
-      font-size: 0.85rem;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-    }
+    .office-quote cite { display: block; margin-top: 0.75rem; font-style: normal; font-size: 0.85rem; }
 
     /* Blog listing */
     .blog-wrapper {
@@ -169,42 +115,88 @@
       padding: 6rem 1.5rem 4rem;
       display: none;
     }
-
     .blog-wrapper h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
-      margin: 0 0 2rem 0;
+      margin: 0 0 1rem 0;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.5rem;
     }
 
-    .post-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    /* Tag filter */
+    .tag-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .tag-btn {
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tag-btn:hover, .tag-btn.active { color: var(--text); border-color: var(--text); }
+
+    .post-list { list-style: none; padding: 0; margin: 0; }
+    .post-item { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .post-item.hidden { display: none; }
+
+    /* Cover image thumbnail in listing */
+    .post-cover-thumb {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      display: block;
     }
 
-    .post-item {
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .post-item a {
+    .post-item-title {
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       text-decoration: none;
       color: var(--text);
     }
+    .post-item-title:hover { text-decoration: underline; }
 
-    .post-item a:hover {
-      text-decoration: underline;
-    }
-
-    .post-date {
-      font-size: 0.85rem;
+    .post-item-desc {
+      font-size: 0.95rem;
       color: var(--muted);
-      margin-top: 0.25rem;
+      margin: 0.3rem 0 0.5rem;
+      font-style: italic;
     }
+
+    .post-item-excerpt {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0.4rem 0 0.5rem;
+      line-height: 1.6;
+    }
+
+    .post-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .post-tag {
+      font-size: 0.78rem;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .post-tag:hover { color: var(--text); border-color: var(--text); }
 
     /* Single post view */
     .post-wrapper {
@@ -215,37 +207,6 @@
       display: none;
       flex-direction: column;
     }
-
-    .post-wrapper h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin: 0 0 0.5rem 0;
-    }
-
-    .post-description {
-      font-size: 1.1rem;
-      color: var(--muted);
-      margin: 0 0 0.5rem 0;
-      font-style: italic;
-    }
-
-    .post-wrapper .post-date {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      display: block;
-    }
-
-    .post-wrapper .post-body {
-      line-height: 1.9;
-    }
-
-    .post-wrapper .post-body h1,
-    .post-wrapper .post-body h2,
-    .post-wrapper .post-body h3 {
-      font-family: 'Playfair Display', serif;
-    }
-
     .back-link {
       display: inline-block;
       margin-bottom: 2rem;
@@ -253,10 +214,94 @@
       color: var(--muted);
       text-decoration: none;
     }
+    .back-link:hover { color: var(--text); }
 
-    .back-link:hover {
-      color: var(--text);
+    .post-cover {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
     }
+
+    .post-wrapper h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0 0 0.4rem 0;
+    }
+    .post-description {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 0 0 0.5rem 0;
+      font-style: italic;
+    }
+    .post-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: block;
+    }
+    .post-reading-time {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .post-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .post-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .post-wrapper .post-body { line-height: 1.9; margin-top: 1.5rem; }
+    .post-wrapper .post-body h1,
+    .post-wrapper .post-body h2,
+    .post-wrapper .post-body h3 { font-family: 'Playfair Display', serif; }
+
+    /* Prev/Next nav */
+    .post-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      gap: 1rem;
+    }
+    .post-nav a { color: var(--muted); text-decoration: none; max-width: 45%; }
+    .post-nav a:hover { color: var(--text); }
+    .post-nav .nav-label { font-size: 0.75rem; display: block; margin-bottom: 0.2rem; }
+    .post-nav .nav-prev { text-align: left; }
+    .post-nav .nav-next { text-align: right; margin-left: auto; }
+
+    /* Share buttons */
+    .share-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .share-btn {
+      font-family: 'Lora', serif;
+      font-size: 0.82rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--text); }
 
     footer {
       text-align: center;
@@ -268,29 +313,21 @@
     }
 
     @media (max-width: 480px) {
-      .topnav a {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.5rem;
-      }
-      .coming-soon-wrapper h1 {
-        font-size: 2.2rem;
-      }
+      .topnav a { font-size: 0.75rem; padding: 0.4rem 0.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle" title="Toggle light/dark mode">
-    🌞 Dark
-  </button>
+  <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle">🌞 Dark</button>
 
   <nav class="topnav">
     <a href="index.html">About</a>
     <span class="divider">|</span>
-    <a href="blog.html" class="active">Blog</a>
+    <a href="/blog.html" class="active">Blog</a>
   </nav>
 
-  <!-- Coming Soon (shown when no posts) -->
+  <!-- Coming Soon -->
   <div class="coming-soon-wrapper" id="coming-soon">
     <h1>Blog</h1>
     <div class="hr-divider"></div>
@@ -301,50 +338,50 @@
     </blockquote>
   </div>
 
-  <!-- Blog post listing (shown when posts exist) -->
+  <!-- Blog listing -->
   <div class="blog-wrapper" id="blog-listing">
     <h1>Blog</h1>
+    <div class="tag-filter" id="tag-filter"></div>
     <ul class="post-list" id="post-list"></ul>
   </div>
 
   <!-- Single post view -->
   <div class="post-wrapper" id="post-view">
     <a class="back-link" href="/blog.html">← Back to Blog</a>
+    <img class="post-cover" id="post-cover" src="" alt="" style="display:none" />
     <h1 id="post-title"></h1>
     <p class="post-description" id="post-description"></p>
-    <span class="post-date" id="post-date"></span>
+    <div class="post-header-meta">
+      <span class="post-date" id="post-date"></span>
+      <span class="post-reading-time" id="post-reading-time"></span>
+    </div>
+    <div class="post-tags-row" id="post-tags-row"></div>
     <div class="post-body" id="post-body"></div>
+    <div class="share-row">
+      Share:
+      <a class="share-btn" id="share-twitter" href="#" target="_blank">𝕏 Twitter</a>
+      <button class="share-btn" onclick="copyLink()">Copy Link</button>
+    </div>
+    <div class="post-nav" id="post-nav"></div>
   </div>
 
-  <footer>
-    &copy; 2025 Purnima Rohilla — All rights reserved.
-  </footer>
+  <footer>&copy; 2025 Purnima Rohilla — All rights reserved.</footer>
 
-  <!-- Marked.js for rendering markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
   <script>
     marked.setOptions({ breaks: true });
-  </script>
 
-  <script>
-    // Theme toggle
+    // Theme
     const toggleBtn = document.getElementById("theme-toggle");
     const saved = localStorage.getItem("theme");
-    if (saved) {
-      document.documentElement.setAttribute("data-theme", saved);
-      updateToggleText(saved);
-    }
+    if (saved) { document.documentElement.setAttribute("data-theme", saved); updateToggleText(saved); }
     function toggleTheme() {
-      const current = document.documentElement.getAttribute("data-theme");
-      const next = current === "light" ? "dark" : "light";
+      const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
       updateToggleText(next);
     }
-    function updateToggleText(theme) {
-      toggleBtn.textContent = theme === "light" ? "🌞 Dark" : "🌙 Light";
-    }
+    function updateToggleText(t) { toggleBtn.textContent = t === "light" ? "🌞 Dark" : "🌙 Light"; }
 
     // GitHub config
     const GITHUB_USER = "ramannv";
@@ -353,117 +390,208 @@
     const BRANCH = "main";
     const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${POSTS_PATH}?ref=${BRANCH}`;
 
-    // Parse frontmatter from markdown
+    function decodeBase64UTF8(b64) {
+      const bin = atob(b64.replace(/\s/g, ""));
+      return new TextDecoder("utf-8").decode(new Uint8Array([...bin].map(c => c.charCodeAt(0))));
+    }
+
     function parseFrontmatter(text) {
-      const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-      if (!match) return { meta: {}, body: text };
+      const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+      if (!m) return { meta: {}, body: text };
       const meta = {};
-      match[1].split("\n").forEach(line => {
-        const [key, ...val] = line.split(":");
-        if (key) meta[key.trim()] = val.join(":").trim().replace(/^["']|["']$/g, "");
+      m[1].split("\n").forEach(line => {
+        const idx = line.indexOf(":");
+        if (idx < 0) return;
+        const key = line.slice(0, idx).trim();
+        const val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+        // Handle YAML lists (- item)
+        if (!meta[key]) meta[key] = val;
       });
-      return { meta, body: match[2] };
+      // Parse tags as array if present
+      const tagsMatch = m[1].match(/tags:\n((?:\s+-\s+.+\n?)+)/);
+      if (tagsMatch) {
+        meta.tags = tagsMatch[1].match(/- (.+)/g).map(t => t.replace("- ", "").trim());
+      } else if (meta.tags) {
+        meta.tags = meta.tags.split(",").map(t => t.trim()).filter(Boolean);
+      }
+      return { meta, body: m[2] };
     }
 
-    // Format date nicely
-    function formatDate(dateStr) {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    function formatDate(d) {
+      return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
     }
 
-    // Check if viewing a single post
-    // Support both /blog/slug (via redirect) and ?post=slug (direct)
+    function readingTime(text) {
+      const words = text.trim().split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      return `${mins} min read`;
+    }
+
+    function getSlug(filename) {
+      return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
+    }
+
+    function excerpt(body, len = 160) {
+      const plain = body.replace(/[#*`_\[\]]/g, "").replace(/\n+/g, " ").trim();
+      return plain.length > len ? plain.slice(0, len).trimEnd() + "…" : plain;
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert("Link copied!"));
+    }
+
+    // Routing
     const params = new URLSearchParams(window.location.search);
     const pathParts = window.location.pathname.split("/").filter(Boolean);
     const postSlug = params.get("post") || (pathParts[0] === "blog" && pathParts[1] ? pathParts[1] : null);
 
-    function decodeBase64UTF8(base64) {
-      const binary = atob(base64.replace(/\s/g, ""));
-      const bytes = new Uint8Array([...binary].map(c => c.charCodeAt(0)));
-      return new TextDecoder("utf-8").decode(bytes);
-    }
-
     if (postSlug) {
-      // Find the actual filename by matching slug against _posts listing
+      // Single post view
       fetch(API_BASE)
         .then(r => r.json())
         .then(files => {
-          const match = files.find(f => f.name.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "") === postSlug);
-          if (!match) return;
-          return fetch(match.url).then(r => r.json());
+          const allMd = files.filter(f => f.name.endsWith(".md"));
+          const idx = allMd.findIndex(f => getSlug(f.name) === postSlug);
+          if (idx < 0) return;
+
+          // Prev / Next
+          const prevFile = allMd[idx + 1] || null;
+          const nextFile = allMd[idx - 1] || null;
+
+          return fetch(allMd[idx].url).then(r => r.json()).then(data => {
+            const text = decodeBase64UTF8(data.content);
+            const { meta, body } = parseFrontmatter(text);
+
+            document.getElementById("post-title").textContent = meta.title || "Untitled";
+            document.title = `${meta.title || "Post"} – Purnima Rohilla`;
+
+            const descEl = document.getElementById("post-description");
+            if (meta.description) descEl.textContent = meta.description; else descEl.style.display = "none";
+
+            document.getElementById("post-date").textContent = meta.date ? formatDate(meta.date) : "";
+            document.getElementById("post-reading-time").textContent = "· " + readingTime(body);
+
+            // Cover image
+            if (meta.cover) {
+              const img = document.getElementById("post-cover");
+              img.src = meta.cover;
+              img.alt = meta.title || "";
+              img.style.display = "block";
+            }
+
+            // Tags
+            const tagsRow = document.getElementById("post-tags-row");
+            if (meta.tags && meta.tags.length) {
+              meta.tags.forEach(tag => {
+                const a = document.createElement("a");
+                a.className = "post-tag";
+                a.textContent = tag;
+                a.href = `/blog.html?tag=${encodeURIComponent(tag)}`;
+                tagsRow.appendChild(a);
+              });
+            }
+
+            document.getElementById("post-body").innerHTML = marked.parse(body);
+
+            // Share
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(meta.title)}&url=${encodeURIComponent(window.location.href)}`;
+            document.getElementById("share-twitter").href = twitterUrl;
+
+            // Prev / Next nav
+            const navEl = document.getElementById("post-nav");
+            if (prevFile || nextFile) {
+              if (prevFile) {
+                const a = document.createElement("a");
+                a.className = "nav-prev";
+                a.href = `/blog/${getSlug(prevFile.name)}`;
+                a.innerHTML = `<span class="nav-label">← Older</span>${getSlug(prevFile.name).replace(/-/g, " ")}`;
+                navEl.appendChild(a);
+              }
+              if (nextFile) {
+                const a = document.createElement("a");
+                a.className = "nav-next";
+                a.href = `/blog/${getSlug(nextFile.name)}`;
+                a.innerHTML = `<span class="nav-label">Newer →</span>${getSlug(nextFile.name).replace(/-/g, " ")}`;
+                navEl.appendChild(a);
+              }
+            }
+
+            document.getElementById("coming-soon").style.display = "none";
+            document.getElementById("post-view").style.display = "flex";
+          });
         })
-        .then(data => {
-          if (!data) return;
-          const text = decodeBase64UTF8(data.content);
-          const { meta, body } = parseFrontmatter(text);
-          document.getElementById("post-title").textContent = meta.title || "Untitled";
-          const descEl = document.getElementById("post-description");
-          if (meta.description) { descEl.textContent = meta.description; } else { descEl.style.display = "none"; }
-          document.getElementById("post-date").textContent = meta.date ? formatDate(meta.date) : "";
-          document.getElementById("post-body").innerHTML = marked.parse(body);
-          document.getElementById("coming-soon").style.display = "none";
-          document.getElementById("post-view").style.display = "flex";
-          document.title = `${meta.title} – Purnima Rohilla`;
-        })
-        .catch(() => {
-          document.getElementById("coming-soon").style.display = "flex";
-        });
+        .catch(() => { document.getElementById("coming-soon").style.display = "flex"; });
 
     } else {
-      // Listing view
+      // Listing view — also support ?tag= filtering
+      const activeTag = params.get("tag") || null;
+
       fetch(API_BASE)
         .then(r => r.json())
         .then(files => {
-         if (!Array.isArray(files) || files.length === 0) {
-            document.getElementById("coming-soon").style.display = "flex";
-            return;
-          } // show Coming Soon
-
+          if (!Array.isArray(files) || !files.length) { document.getElementById("coming-soon").style.display = "flex"; return; }
           const mdFiles = files.filter(f => f.name.endsWith(".md"));
-          if (mdFiles.length === 0) {
-            document.getElementById("coming-soon").style.display = "flex";
-            return;
-          }
-
-
-          // Fetch all posts to get titles and dates
+          if (!mdFiles.length) { document.getElementById("coming-soon").style.display = "flex"; return; }
           return Promise.all(mdFiles.map(f =>
             fetch(f.url).then(r => r.json()).then(data => {
               const text = decodeBase64UTF8(data.content);
-              const { meta } = parseFrontmatter(text);
-              return { name: f.name, title: meta.title || f.name, date: meta.date || "" };
+              const { meta, body } = parseFrontmatter(text);
+              return { name: f.name, title: meta.title || f.name, date: meta.date || "", description: meta.description || "", cover: meta.cover || "", tags: meta.tags || [], body };
             })
           ));
         })
         .then(posts => {
-          if (!posts || posts.length === 0) return;
-
-          // Sort by date descending
+          if (!posts || !posts.length) return;
           posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+          // Build tag filter
+          const allTags = [...new Set(posts.flatMap(p => p.tags))].filter(Boolean);
+          const tagFilter = document.getElementById("tag-filter");
+          if (allTags.length) {
+            const all = document.createElement("button");
+            all.className = "tag-btn" + (!activeTag ? " active" : "");
+            all.textContent = "All";
+            all.onclick = () => window.location = "/blog.html";
+            tagFilter.appendChild(all);
+            allTags.forEach(tag => {
+              const btn = document.createElement("button");
+              btn.className = "tag-btn" + (activeTag === tag ? " active" : "");
+              btn.textContent = tag;
+              btn.onclick = () => window.location = `/blog.html?tag=${encodeURIComponent(tag)}`;
+              tagFilter.appendChild(btn);
+            });
+          }
+
+          // Render posts
           const list = document.getElementById("post-list");
-          document.getElementById("post-list").innerHTML = "";
+          list.innerHTML = "";
           posts.forEach(post => {
-            // Strip date prefix (YYYY-MM-DD-) and .md extension for clean URL
-            const slug = post.name.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
+            const slug = getSlug(post.name);
+            const matchesTag = !activeTag || post.tags.includes(activeTag);
             const li = document.createElement("li");
-            li.className = "post-item";
-            li.innerHTML = `
-              <a href="/blog/${encodeURIComponent(slug)}">${post.title}</a>
-              <div class="post-date">${post.date ? formatDate(post.date) : ""}</div>
-            `;
+            li.className = "post-item" + (matchesTag ? "" : " hidden");
+
+            let html = "";
+            if (post.cover) html += `<img class="post-cover-thumb" src="${post.cover}" alt="${post.title}" />`;
+            html += `<a class="post-item-title" href="/blog/${encodeURIComponent(slug)}">${post.title}</a>`;
+            if (post.description) html += `<div class="post-item-desc">${post.description}</div>`;
+            html += `<div class="post-item-excerpt">${excerpt(post.body)}</div>`;
+            html += `<div class="post-meta"><span>${post.date ? formatDate(post.date) : ""}</span><span>${readingTime(post.body)}</span>`;
+            if (post.tags.length) {
+              post.tags.forEach(tag => {
+                html += `<span class="post-tag" onclick="window.location='/blog.html?tag=${encodeURIComponent(tag)}'">${tag}</span>`;
+              });
+            }
+            html += `</div>`;
+            li.innerHTML = html;
             list.appendChild(li);
           });
 
           document.getElementById("coming-soon").style.display = "none";
           document.getElementById("blog-listing").style.display = "block";
         })
-        .catch(() => {
-          document.getElementById("coming-soon").style.display = "flex";
-        });
- // on any error, just show Coming Soon
+        .catch(() => { document.getElementById("coming-soon").style.display = "flex"; });
     }
   </script>
-
 </body>
 </html>
