@@ -13,5 +13,6 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subheading", name: "description", widget: "string", required: false, hint: "Optional subtitle shown below the title" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Body", name: "body", widget: "markdown" }

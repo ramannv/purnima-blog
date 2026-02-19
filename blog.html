@@ -222,6 +222,13 @@
       margin: 0 0 0.5rem 0;
     }
 
+    .post-description {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 0 0 0.5rem 0;
+      font-style: italic;
+    }
+
     .post-wrapper .post-date {
       font-size: 0.85rem;
       color: var(--muted);
@@ -304,6 +311,7 @@
   <div class="post-wrapper" id="post-view">
     <a class="back-link" href="/blog.html">← Back to Blog</a>
     <h1 id="post-title"></h1>
+    <p class="post-description" id="post-description"></p>
     <span class="post-date" id="post-date"></span>
     <div class="post-body" id="post-body"></div>
   </div>
@@ -389,6 +397,8 @@
           const text = decodeBase64UTF8(data.content);
           const { meta, body } = parseFrontmatter(text);
           document.getElementById("post-title").textContent = meta.title || "Untitled";
+          const descEl = document.getElementById("post-description");
+          if (meta.description) { descEl.textContent = meta.description; } else { descEl.style.display = "none"; }
           document.getElementById("post-date").textContent = meta.date ? formatDate(meta.date) : "";
           document.getElementById("post-body").innerHTML = marked.parse(body);
           document.getElementById("coming-soon").style.display = "none";
