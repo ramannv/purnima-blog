@@ -63,18 +63,19 @@
     }
 
     .toggle-btn {
-      position: absolute;
-      top: 1rem;
+      position: fixed;
+      top: 0.55rem;
       right: 1rem;
-      font-size: 0.9rem;
-      padding: 0.4rem 0.7rem;
-      background: none;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 4px;
       color: var(--text);
-      background-color: var(--bg);
       cursor: pointer;
-      transition: background-color 0.3s, color 0.3s, border 0.3s;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      z-index: 1001;
+      line-height: 1;
     }
 
     header {
@@ -329,9 +330,7 @@
     <a href="blog.html">Blog</a>
   </nav>
 
-  <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle" title="Toggle light/dark mode">
-    🌞 Switch to Dark Mode
-  </button>
+  <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle" title="Toggle light/dark mode">☀</button>
 
   <nav class="sidebar">
     <div class="sidebar-name">
@@ -527,7 +526,7 @@
     const saved = localStorage.getItem("theme");
     if (saved) {
       document.documentElement.setAttribute("data-theme", saved);
-      updateToggleText(saved);
+      updateToggleIcon(saved);
     }
 
     function toggleTheme() {
@@ -535,12 +534,11 @@
       const next = current === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
-      updateToggleText(next);
+      updateToggleIcon(next);
     }
 
-    function updateToggleText(theme) {
-      toggleBtn.textContent =
-        theme === "light" ? "🌞 Switch to Dark Mode" : "🌙 Switch to Light Mode";
+    function updateToggleIcon(theme) {
+      toggleBtn.textContent = theme === "light" ? "☀" : "🌙";
     }
 
     const observer = new IntersectionObserver(
